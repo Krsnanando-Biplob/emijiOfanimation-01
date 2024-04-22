@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>emoji</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    body{
+      background: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .face{
+      position: absolute;
+      width: 300px; 
+      height: 300px;
+      border-radius: 50%;
+      background: orange;
+    }
+    .eye{
+      position: absolute;
+      width: 90px;
+      height: 90px; 
+      border-radius: 50%;
+      background-color: #fff;
+      top: 60px; 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: 25px;
+      margin-right: 25px;
+      border: 5px solid #333;
+    }
+    .pupil{
+      width: 30px; 
+      height: 30px; 
+      border-radius: 50%;
+      background: #000;
+      position: absolute;
+    }
+
+    .eye:nth-child(1){
+      left: 20px; 
+    }
+    .eye:nth-child(2)
+    {
+      right: 20px; 
+    }
+    .lips{
+      width: 240px; 
+      height: 240px; 
+      background-color: transparent;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 60px; 
+      left: 50%;
+      margin-left: -120px; 
+      border: 3px solid black; 
+      border-color: transparent transparent #000 transparent;
+    }
+  </style>
+</head>
+<body>
+  <section class="face">
+    <div class="eye">
+      <div class="pupil"></div>
+    </div>
+    <div class="eye">
+      <div class="pupil"></div>
+    </div>
+    <div class="lips"></div>
+  </section>
+  <script>
+    const handleMove=(e)=>{
+      const {clientX, clientY}= e;
+      const {innerWidth, innerHeight} = window;
+      const frictionX= clientX / innerWidth;
+      const frictionY= clientY / innerHeight;
+
+      const pupilX= -30 + frictionX * 60;
+      const pupilY= -30 + frictionY * 60; 
+
+      document.querySelectorAll(".pupil")
+        .forEach(el => {
+          el.style.transform = `translate(${pupilX}px, ${pupilY}px)`;
+        });
+    }
+    window.addEventListener("mousemove", handleMove)
+  </script>
+</body>
+</html>
